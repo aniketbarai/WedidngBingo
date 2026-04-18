@@ -13,7 +13,7 @@ export default function Gallery() {
   const fetchImages = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/images?page=${page}&limit=12&sort=${sortBy}`);
+      const res = await fetch(`/api/images?page=${page}&limit=12&sort=${sortBy}`);
       const data = await res.json();
       setImages(data);
     } catch (err) {
@@ -34,7 +34,7 @@ export default function Gallery() {
     if (e) e.stopPropagation();
     if (myLikes.includes(id)) return;
     try {
-      const res = await fetch(`http://localhost:5000/like/${id}`, { method: "POST" });
+      const res = await fetch(`/api/like/${id}`, { method: "POST" });
       const data = await res.json();
       if (res.ok) {
         const updatedLikes = [...myLikes, id];
@@ -49,7 +49,7 @@ export default function Gallery() {
   const handleOpen = async (img) => {
     setSelected(img);
     try {
-      const res = await fetch(`http://localhost:5000/click/${img._id}`, { method: "POST" });
+      const res = await fetch(`/api/click/${img._id}`, { method: "POST" });
       const data = await res.json();
       if (data.success) {
         setImages(prev => prev.map(item => item._id === img._id ? { ...item, clicks: data.clicks } : item));
