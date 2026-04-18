@@ -1,0 +1,5 @@
+-- Color Palette
+#263431
+#CFC4AB
+#EAE7E3
+#635F5A
